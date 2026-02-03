@@ -1,16 +1,9 @@
 # AGENTS.md
 
-Guidelines for developing Tinker plugins in this repo.
+Guidelines for developing a TINKER plugin.
 
-## Core Rules
+## Project layout
 
-- Do not install new npm dependencies without asking first.
-- Prefer existing utilities and native APIs; keep the template minimal.
-- Keep changes self‑contained in this repo (no external references).
-
-## Project Layout
-
-Basic plugin:
 ```
 src/
   renderer/
@@ -24,13 +17,47 @@ package.json
 icon.png
 ```
 
-## Coding Style
+## Coding style
 
 - React + TypeScript.
-- Use Tailwind for UI styling.
-- Keep components small and focused.
+- Tailwind for UI.
+- Small, focused components.
+
+## TINKER configuration
+
+Declare `tinker` in `package.json` (see `tinker-template`):
+
+```
+"tinker": {
+  "name": "Template",
+  "main": "dist/renderer/index.html",
+  "icon": "icon.png",
+  "preload": "dist/preload/index.js",
+  "locales": { "zh-CN": { "name": "模板" } }
+}
+```
+
+Notes: `name` is the display name; `main` is entry page; `icon` is plugin icon;
+`preload` only when Node API is needed; `locales` adds localized names.
+Prefer plugin package `name` as `tinker-xxx`.
+
+## Tinker API
+
+Global `tinker` is available in renderer and preload (see `tinker.d.ts`):
+- Theme/locale: `getTheme()` / `getLanguage()`
+- Dialogs: `showOpenDialog()` / `showSaveDialog()`
+- System: `showItemInPath()` / `showContextMenu()` / `setTitle()`
+- Clipboard: `getClipboardFilePaths()`
+- File IO: `readFile()` / `writeFile()`
+- Events: `on('changeTheme' | 'changeLanguage', ...)`
 
 ## Preload
 
-- Only expose explicit APIs via `contextBridge.exposeInMainWorld`.
-- Avoid Node APIs unless needed.
+- Use Node APIs only in `preload/index.ts`.
+- Expose minimal APIs via `contextBridge.exposeInMainWorld()`.
+
+```ts
+contextBridge.exposeInMainWorld('api', {
+  readText: (path: string) => tinker.readFile(path, 'utf-8'),
+})
+```

@@ -8,10 +8,8 @@
     "dev:preload": "vite build --watch --config vite.preload.ts",
     "build": "concurrently \"npm run build:renderer\" \"npm run build:preload\"",
     "build:renderer": "vite build",
-    "build:preload": "vite build --config vite.preload.ts",
-    "preview": "vite preview"
+    "build:preload": "vite build --config vite.preload.ts"
   },
-  "embedded": false,
   "tinker": {
     "name": "Template",
     "main": "dist/renderer/index.html",
