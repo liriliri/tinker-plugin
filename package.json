@@ -1,0 +1,42 @@
+{
+  "name": "tinker-plugin",
+  "version": "0.1.0",
+  "description": "Template Plugin for Tinker",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:renderer\" \"npm run dev:preload\"",
+    "dev:renderer": "vite",
+    "dev:preload": "vite build --watch --config vite.preload.ts",
+    "build": "concurrently \"npm run build:renderer\" \"npm run build:preload\"",
+    "build:renderer": "vite build",
+    "build:preload": "vite build --config vite.preload.ts",
+    "preview": "vite preview"
+  },
+  "embedded": false,
+  "tinker": {
+    "name": "Template",
+    "main": "dist/renderer/index.html",
+    "preload": "dist/preload/index.js",
+    "locales": {
+      "zh-CN": {
+        "name": "模板"
+      }
+    }
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.1.9",
+    "@types/react-dom": "^19.1.7",
+    "@tailwindcss/postcss": "^4.1.17",
+    "@vitejs/plugin-react": "^4.7.0",
+    "autoprefixer": "^10.4.22",
+    "concurrently": "^9.2.0",
+    "electron": "^30.5.1",
+    "postcss": "^8.5.6",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "sass": "^1.89.2",
+    "tailwindcss": "^4.1.17",
+    "typescript": "^5.8.3",
+    "vite": "^5.4.19"
+  }
+}
