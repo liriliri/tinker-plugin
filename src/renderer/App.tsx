@@ -1,5 +1,19 @@
-import HelloWorld from './components/HelloWorld'
+import { observer } from 'mobx-react-lite'
+import { useEffect } from 'react'
+import WhoisQuery from './components/WhoisQuery'
+import store from './store'
 
-export default function App() {
-  return <HelloWorld />
-}
+const App = observer(() => {
+  useEffect(() => {
+    // Apply dark class to root element based on theme
+    if (store.isDark) {
+      document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+    }
+  }, [store.isDark])
+
+  return <WhoisQuery />
+})
+
+export default App

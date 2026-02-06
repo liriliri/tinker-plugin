@@ -22,6 +22,7 @@ icon.png
 - React + TypeScript.
 - Tailwind for UI.
 - Small, focused components.
+- Avoid unnecessary comments - code should be self-explanatory.
 
 ## TINKER configuration
 

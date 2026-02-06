@@ -1,0 +1,23 @@
+{
+  "title": "WHOIS Query",
+  "subtitle": "Query WHOIS information for domains, IP addresses, or ASN",
+  "placeholder": "Enter domain (e.g., google.com), IP address, or ASN",
+  "querying": "Querying...",
+  "query": "Query",
+  "examples": "Examples:",
+  "queryResults": "Query Results",
+  "server": "Server",
+  "queryFailed": "Query Failed",
+  "domainName": "Domain Name",
+  "registrar": "Registrar",
+  "registrarUrl": "Registrar URL",
+  "creationDate": "Creation Date",
+  "expiryDate": "Expiry Date",
+  "updatedDate": "Updated Date",
+  "status": "Status",
+  "nameServers": "Name Servers",
+  "dnssec": "DNSSEC",
+  "registrant": "Registrant",
+  "admin": "Admin",
+  "tech": "Tech"
+}

@@ -1,0 +1,23 @@
+{
+  "title": "WHOIS 查询",
+  "subtitle": "查询域名、IP 地址或 ASN 的 WHOIS 信息",
+  "placeholder": "输入域名（例如 google.com）、IP 地址或 ASN",
+  "querying": "查询中...",
+  "query": "查询",
+  "examples": "示例：",
+  "queryResults": "查询结果",
+  "server": "服务器",
+  "queryFailed": "查询失败",
+  "domainName": "域名",
+  "registrar": "注册商",
+  "registrarUrl": "注册商 URL",
+  "creationDate": "创建日期",
+  "expiryDate": "过期日期",
+  "updatedDate": "更新日期",
+  "status": "状态",
+  "nameServers": "名称服务器",
+  "dnssec": "DNSSEC",
+  "registrant": "注册人",
+  "admin": "管理员",
+  "tech": "技术"
+}

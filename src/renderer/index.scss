@@ -1,11 +1,6 @@
 @import 'tailwindcss';
 @config "../../tailwind.config.js";
 
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+html.dark {
+  color-scheme: dark;
 }

@@ -1,9 +1,14 @@
 import { contextBridge } from 'electron'
+import { whoisQuery, WhoisResult } from './whoisQuery'
 
-const api = {}
+const whoisObj = {
+  query: (resource: string): Promise<WhoisResult> => {
+    return whoisQuery(resource)
+  },
+}
 
-contextBridge.exposeInMainWorld('plugin', api)
+contextBridge.exposeInMainWorld('whois', whoisObj)
 
 declare global {
-  const plugin: typeof api
+  const whois: typeof whoisObj
 }
