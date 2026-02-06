@@ -72,8 +72,3 @@ Restart Tinker after `npm link` to load the global plugin.
 - WHOIS queries use standard TCP protocol, connecting directly to WHOIS servers
 - Some WHOIS servers may have rate limiting
 - Query timeout is set to 10 seconds
-
-## License
-
-MIT
-
