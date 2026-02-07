@@ -2,7 +2,7 @@
 
 A WHOIS query plugin for TINKER, supporting domain, IP address, and ASN lookups.
 
-![Screenshot](screenshot.png)
+![Screenshot](https://raw.githubusercontent.com/liriliri/tinker-whois/master/screenshot.png)
 
 ## Features
 
