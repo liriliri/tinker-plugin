@@ -19,14 +19,13 @@ icon.png
 
 ## Coding style
 
-- React + TypeScript.
-- Tailwind for UI.
+- React + TypeScript + Tailwind.
 - Small, focused components.
-- Avoid unnecessary comments - code should be self-explanatory.
+- Avoid unnecessary comments.
 
 ## TINKER configuration
 
-Declare `tinker` in `package.json` (see `tinker-template`):
+Declare `tinker` in `package.json`:
 
 ```
 "tinker": {
@@ -38,9 +37,7 @@ Declare `tinker` in `package.json` (see `tinker-template`):
 }
 ```
 
-Notes: `name` is the display name; `main` is entry page; `icon` is plugin icon;
-`preload` only when Node API is needed; `locales` adds localized names.
-Prefer plugin package `name` as `tinker-xxx`.
+Notes: `preload` only when needed; `locales` for localized names; prefer `tinker-xxx` package name.
 
 ## Tinker API
 
@@ -54,7 +51,7 @@ Global `tinker` is available in renderer and preload (see `tinker.d.ts`):
 
 ## Preload
 
-- Use Node APIs only in `preload/index.ts`.
+- Node APIs only in `preload/index.ts`.
 - Expose minimal APIs via `contextBridge.exposeInMainWorld()`.
 
 ```ts
@@ -62,3 +59,13 @@ contextBridge.exposeInMainWorld('api', {
   readText: (path: string) => tinker.readFile(path, 'utf-8'),
 })
 ```
+
+## Debugging
+
+Local development with global plugin:
+
+```bash
+npm link
+```
+
+Restart Tinker after `npm link` to load the global plugin.

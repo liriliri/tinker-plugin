@@ -1,6 +1,6 @@
 {
   "name": "tinker-whois",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "WHOIS Query Plugin for Tinker",
   "files": [
     "dist/",
@@ -15,6 +15,10 @@
     "build:preload": "vite build --config vite.preload.ts",
     "format": "prettier \"src/**/*.{ts,tsx,scss}\" \"*.{html,json,js,ts}\" --write"
   },
+  "keywords": [
+    "tinker",
+    "whois"
+  ],
   "tinker": {
     "name": "WHOIS",
     "main": "dist/renderer/index.html",
