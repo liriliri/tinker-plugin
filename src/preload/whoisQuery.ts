@@ -91,10 +91,11 @@ async function queryDomain(domain: string): Promise<WhoisResult> {
     const data = await queryWhoisServer(server, formattedQuery)
     const parsed = parseWhoisData(data)
 
+    // Only include parsed data if it's meaningful (not null)
     return {
       success: true,
       data,
-      parsed,
+      ...(parsed && { parsed }),
       server,
     }
   } catch (error) {

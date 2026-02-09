@@ -8,22 +8,6 @@ export interface ParsedWhoisData {
   status?: string[]
   nameServers?: string[]
   dnssec?: string
-  registrant?: {
-    name?: string
-    organization?: string
-    email?: string
-    country?: string
-  }
-  admin?: {
-    name?: string
-    organization?: string
-    email?: string
-  }
-  tech?: {
-    name?: string
-    organization?: string
-    email?: string
-  }
 }
 
 function extractField(text: string, patterns: string[]): string | undefined {
@@ -54,7 +38,27 @@ function extractMultipleFields(text: string, patterns: string[]): string[] {
   return results
 }
 
-export function parseWhoisData(rawData: string): ParsedWhoisData {
+export function parseWhoisData(rawData: string): ParsedWhoisData | null {
+  // First, check for common "not found" patterns in the raw data
+  const lowerData = rawData.toLowerCase()
+  const notFoundPatterns = [
+    'no match',
+    'not found',
+    'no data found',
+    'no entries found',
+    'domain not found',
+    'no match for',
+    'no matching record',
+    'does not exist',
+    'not registered',
+    'available for registration',
+  ]
+
+  // If the response contains any "not found" patterns, return null immediately
+  if (notFoundPatterns.some((pattern) => lowerData.includes(pattern))) {
+    return null
+  }
+
   const lines = rawData.split('\n')
   const parsed: ParsedWhoisData = {}
 
@@ -117,72 +121,14 @@ export function parseWhoisData(rawData: string): ParsedWhoisData {
 
   parsed.dnssec = extractField(rawData, ['DNSSEC', 'dnssec'])
 
-  const registrantName = extractField(rawData, [
-    'Registrant Name',
-    'Registrant Contact Name',
-  ])
-  const registrantOrg = extractField(rawData, [
-    'Registrant Organization',
-    'Registrant',
-  ])
-  const registrantEmail = extractField(rawData, [
-    'Registrant Email',
-    'Registrant Contact Email',
-  ])
-  const registrantCountry = extractField(rawData, [
-    'Registrant Country',
-    'Registrant Contact Country',
-  ])
+  // Check if parsed data has meaningful information
+  // Following the reference implementation: check for key fields
+  // A valid domain should have at least registrar AND one of the date fields
+  const hasMinimalData =
+    parsed.registrar && (parsed.creationDate || parsed.expiryDate)
 
-  if (registrantName || registrantOrg || registrantEmail || registrantCountry) {
-    parsed.registrant = {
-      name: registrantName,
-      organization: registrantOrg,
-      email: registrantEmail,
-      country: registrantCountry,
-    }
-  }
-
-  const adminName = extractField(rawData, [
-    'Admin Name',
-    'Administrative Contact Name',
-  ])
-  const adminOrg = extractField(rawData, [
-    'Admin Organization',
-    'Administrative Contact Organization',
-  ])
-  const adminEmail = extractField(rawData, [
-    'Admin Email',
-    'Administrative Contact Email',
-  ])
-
-  if (adminName || adminOrg || adminEmail) {
-    parsed.admin = {
-      name: adminName,
-      organization: adminOrg,
-      email: adminEmail,
-    }
-  }
-
-  const techName = extractField(rawData, [
-    'Tech Name',
-    'Technical Contact Name',
-  ])
-  const techOrg = extractField(rawData, [
-    'Tech Organization',
-    'Technical Contact Organization',
-  ])
-  const techEmail = extractField(rawData, [
-    'Tech Email',
-    'Technical Contact Email',
-  ])
-
-  if (techName || techOrg || techEmail) {
-    parsed.tech = {
-      name: techName,
-      organization: techOrg,
-      email: techEmail,
-    }
+  if (!hasMinimalData) {
+    return null
   }
 
   return parsed

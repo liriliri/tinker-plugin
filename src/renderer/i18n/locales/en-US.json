@@ -11,6 +11,8 @@
   "pressEnterToQuery": "Press Enter to query",
   "parsedData": "Parsed Data",
   "rawData": "Raw Data",
+  "viewParsed": "View Parsed",
+  "viewRaw": "View Raw",
   "domainName": "Domain Name",
   "registrar": "Registrar",
   "registrarUrl": "Registrar URL",
@@ -19,12 +21,5 @@
   "updatedDate": "Updated Date",
   "status": "Status",
   "nameServers": "Name Servers",
-  "dnssec": "DNSSEC",
-  "registrant": "Registrant",
-  "admin": "Admin",
-  "tech": "Tech",
-  "name": "Name",
-  "organization": "Organization",
-  "email": "Email",
-  "country": "Country"
+  "dnssec": "DNSSEC"
 }
